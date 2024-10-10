@@ -1,0 +1,51 @@
+package com.example.bindingapp
+
+import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import android.graphics.Color
+import android.view.View
+import android.widget.TextView
+import com.example.bindingapp.databinding.ActivityMainBinding
+
+class MainActivity : AppCompatActivity() {
+
+    // Ініціалізація ViewBinding
+    private lateinit var binding: ActivityMainBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Використовуємо ViewBinding для доступу до елементів
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Кнопка, яка ховає TextView з ім'ям
+        binding.buttonHide.setOnClickListener {
+            binding.textViewName.visibility = View.INVISIBLE
+        }
+
+        // Кнопка, яка показує TextView з ім'ям
+        binding.buttonShow.setOnClickListener {
+            binding.textViewName.visibility = View.VISIBLE
+        }
+
+        // Клік на TextView для зміни кольору
+        binding.textViewName.setOnClickListener {
+            changeTextColor(binding.textViewName)
+        }
+        binding.textViewGroup.setOnClickListener {
+            changeTextColor(binding.textViewGroup)
+        }
+        binding.textViewCity.setOnClickListener {
+            changeTextColor(binding.textViewCity)
+        }
+    }
+
+    // Функція зміни кольору тексту
+    private fun changeTextColor(textView: TextView) {
+        textView.setTextColor(Color.RED)
+    }
+}
